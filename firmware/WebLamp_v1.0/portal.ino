@@ -4,6 +4,9 @@ bool checkPortal() {
     if (portal.update("ledL")) portal.answer(mqtt.connected());
     if (portal.update("ledR")) portal.answer(!onlineTmr.elapsed());
     if (portal.update("ledP")) portal.answer((!pirTmr.elapsed() && !onlineTmr.elapsed()));
+    if (portal.update("br")) portal.answer(data.bright);
+    if (portal.update("sw")) portal.answer(data.power);
+    if (portal.update("col")) portal.answer(data.color);
   }
 
   // клики

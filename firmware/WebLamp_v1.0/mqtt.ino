@@ -8,6 +8,7 @@ void connectMQTT() {
   // задаём случайный ID
   String id("WebLamp-");
   id += String(random(0xffffff), HEX);
+  DEBUGLN(id);
   // подписываемся на своё имя
   if (mqtt.connect(id.c_str())) mqtt.subscribe(data.local);
   delay(1000);
@@ -17,7 +18,7 @@ void connectMQTT() {
 void callback(char* topic, byte* payload, uint16_t len) {
   payload[len] = '\0';        // закрываем строку
   char* str = (char*)payload; // для удобства
-  DEBUGLN(str);
+  //DEBUGLN(str);
   // не наш пакет, выходим
   if (strncmp(str, MQTT_HEADER, strlen(MQTT_HEADER))) return;
 

@@ -3,7 +3,7 @@ void build() {
   BUILD_BEGIN(s);
 
   add.THEME(GP_DARK);
-  add.AJAX_UPDATE("ledL,ledR,ledP", 2000);
+  add.AJAX_UPDATE("ledL,ledR,ledP,sw,br,col", 2000);
 
   add.LABEL("STATUS");
   add.BLOCK_BEGIN();
