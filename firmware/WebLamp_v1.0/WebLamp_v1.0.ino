@@ -78,6 +78,8 @@ GyverPortal portal;
 EEManager memory(data);
 bool pirFlag = 0;
 bool winkFlag = 0;
+bool startFlag = 0;
+const uint8_t hLen = strlen(MQTT_HEADER);
 
 Timer onlineTmr(18000, false);  // 18 секунд таймаут онлайна
 Timer pirTmr(60000, false);     // 1 минута таймаут пира
@@ -89,8 +91,8 @@ void setup() {
 
 void loop() {
   if (USE_PIR && digitalRead(PIR_PIN)) pirFlag = 1;  // опрос ИК датчика
-  if (hbTmr.period()) sendPacket();       // отправляем пакет что мы онлайн
-
+  
+  heartbeat();    // отправляем пакет что мы онлайн
   memory.tick();  // проверяем обновление настроек
   animation();    // эффект ленты
   buttonTick();   // действия кнопки
