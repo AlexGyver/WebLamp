@@ -1,14 +1,4 @@
 bool checkPortal() {
-  // обновления
-  if (portal.update()) {
-    if (portal.update("ledL")) portal.answer(mqtt.connected());
-    if (portal.update("ledR")) portal.answer(!onlineTmr.elapsed());
-    if (portal.update("ledP")) portal.answer((!pirTmr.elapsed() && !onlineTmr.elapsed()));
-    if (portal.update("br")) portal.answer(data.bright);
-    if (portal.update("sw")) portal.answer(data.power);
-    if (portal.update("col")) portal.answer(data.color);
-  }
-
   // клики
   if (portal.click()) {
     if (portal.click("br")) data.bright = portal.getInt("br");
@@ -21,6 +11,16 @@ bool checkPortal() {
       sendPacket();
     }
     if (portal.click()) memory.update();
+  }
+
+  // обновления
+  if (portal.update()) {
+    if (portal.update("ledL")) portal.answer(mqtt.connected());
+    if (portal.update("ledR")) portal.answer(!onlineTmr.elapsed());
+    if (portal.update("ledP")) portal.answer((!pirTmr.elapsed() && !onlineTmr.elapsed()));
+    if (portal.update("br")) portal.answer(data.bright);
+    if (portal.update("sw")) portal.answer(data.power);
+    if (portal.update("col")) portal.answer(data.color);
   }
 
   // формы

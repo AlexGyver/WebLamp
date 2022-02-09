@@ -1,5 +1,6 @@
 // опрашиваем mqtt
 void mqttTick() {
+  if (WiFi.status() != WL_CONNECTED) return;  // wifi не подключен
   if (!mqtt.connected()) connectMQTT();
   mqtt.loop();
 }

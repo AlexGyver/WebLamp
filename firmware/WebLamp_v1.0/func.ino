@@ -45,7 +45,7 @@ void animation() {
     } else {
       breath = 1;
     }    
-    uint8_t curBr = data.power ? (breath ? 255 : 190) : 0;
+    uint8_t curBr = data.power ? (breath ? 255 : 210) : 0;
 
     // здесь делаем плавные переходы между цветами
     CRGB ncol = CHSV(data.color, 255, curBr);
