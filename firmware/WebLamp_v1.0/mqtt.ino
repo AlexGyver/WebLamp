@@ -25,8 +25,9 @@ void connectMQTT() {
   id += String(random(0xffffff), HEX);
   //DEBUGLN(id);
   // подписываемся на своё имя
-  if (data.login != "") if (mqtt.connect(id.c_str(), data.mqttlogin, data.mqttpass)) mqtt.subscribe(data.local);
-  else{
+  if (data.mqttlogin != ""){
+    if (mqtt.connect(id.c_str(), data.mqttlogin, data.mqttpass)) mqtt.subscribe(data.local);
+  }else{
     if (mqtt.connect(id.c_str())) mqtt.subscribe(data.local);
   }
   delay(1000);
