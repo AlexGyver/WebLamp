@@ -43,6 +43,10 @@ void build() {
   add.TEXT("host", "Host", data.host);
   add.BREAK();
   add.NUMBER("port", "Port", data.port);
+  add.BREAK();
+  add.TEXT("mqttlogin", "Login", data.mqttlogin);
+  add.BREAK();
+  add.PASS("mqttpass", "Password", data.mqttpass);  
   add.BLOCK_END();
   add.SUBMIT("Save");
 
