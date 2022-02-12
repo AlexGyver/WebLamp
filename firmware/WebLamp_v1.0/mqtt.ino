@@ -24,7 +24,7 @@ void connectMQTT() {
   String id("WebLamp-");
   id += String(random(0xffffff), HEX);
   //DEBUGLN(id);
-  if(!data.advanced_auth){
+  if(!data.use_mqtt_auth){
     // подписываемся на своё имя
     if (mqtt.connect(id.c_str())) mqtt.subscribe(data.local);
   }
