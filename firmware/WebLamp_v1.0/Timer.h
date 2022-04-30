@@ -5,7 +5,8 @@ struct Timer {
   // указать период, опционально статус (запущен/не запущен)
   Timer (uint32_t nprd, bool nstate = true) {
     state = nstate;
-    setPeriod(nprd);    
+    setPeriod(nprd);
+    tmr = millis();
   }
 
   // сменить период
