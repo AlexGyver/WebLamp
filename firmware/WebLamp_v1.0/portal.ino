@@ -31,6 +31,9 @@ bool checkPortal() {
       portal.copyStr("local", data.local);
       portal.copyStr("remote", data.remote);
       portal.copyStr("host", data.host);
+      data.use_mqtt_auth = portal.getCheck("advanced_auth");
+      portal.copyStr("mqtt_u", data.mqtt_username);
+      portal.copyStr("mqtt_p", data.data.mqtt_password);
       data.port = portal.getInt("port");
 
       memory.updateNow();

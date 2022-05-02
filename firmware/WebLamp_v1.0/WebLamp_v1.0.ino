@@ -62,6 +62,9 @@ struct LampData {
   char remote[20] = "AG_lamp_2";
   char host[32] = "broker.mqttdashboard.com";
   uint16_t port = 1883;
+  bool use_mqtt_auth = false;
+  char mqtt_username[32] = "";
+  char mqtt_password[32] = "";
   uint8_t ip[4] = {0, 0, 0, 0};
 
   bool power = 1;

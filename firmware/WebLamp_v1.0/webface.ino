@@ -43,6 +43,11 @@ void build() {
   add.TEXT("host", "Host", data.host);
   add.BREAK();
   add.NUMBER("port", "Port", data.port);
+  add.LABEL("Use advanced mqtt auth");
+  add.CHECK("advanced_auth",data.use_mqtt_auth);
+  add.TEXT("mqtt_u", "Username", data.mqtt_username);
+  add.BREAK();
+  add.PASS("mqtt_p", "Password", data.mqtt_password);
   add.BLOCK_END();
   add.SUBMIT("Save");
 
