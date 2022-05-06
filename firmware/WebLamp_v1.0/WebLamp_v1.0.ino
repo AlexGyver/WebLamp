@@ -64,6 +64,9 @@ struct LampData {
   uint16_t port = 1883;
   uint8_t ip[4] = {0, 0, 0, 0};
 
+  bool use_enc_phrase = false;
+  char enc_phrase[20] = "";
+
   bool power = 1;
   uint8_t bright = 50;
   uint8_t color = 0;

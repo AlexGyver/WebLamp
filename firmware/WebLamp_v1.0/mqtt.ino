@@ -5,6 +5,16 @@
   GWL:2     // запрос настроек
 */
 
+/*
+  Функция шифрования с помощью XOR :-\
+*/
+template<class T> void xor_crypt(const char *key, T &data, int data_len)
+{
+  int key_len = strlen(key);
+  for (int i = 0; i < data_len; i++)
+    data[i] ^= key[ i % key_len ];
+}
+
 // опрашиваем mqtt
 void mqttTick() {
   if (WiFi.status() != WL_CONNECTED) return;  // wifi не подключен
@@ -13,6 +23,14 @@ void mqttTick() {
     if (!startFlag) {
       startFlag = 1;
       char str[] = MQTT_HEADER "2";  // +2
+
+      //если включено шифрование
+      if (data.use_enc_phrase)
+      {
+        xor_crypt(data.enc_phrase, str, hLen + 1);
+        DEBUGLN(str);
+      }
+
       mqtt.publish(data.remote, str);
     }
   }
@@ -34,6 +52,14 @@ void callback(char* topic, byte* payload, uint16_t len) {
   payload[len] = '\0';        // закрываем строку
   char* str = (char*)payload; // для удобства
   DEBUGLN(str);
+
+  //если включено шифрование
+  if (data.use_enc_phrase)
+  {
+    xor_crypt(data.enc_phrase, str, len);
+    DEBUGLN(str);
+  }
+  
   // не наш пакет, выходим
   if (strncmp(str, MQTT_HEADER, hLen)) return;
 
@@ -71,6 +97,14 @@ void sendPacket() {
   s += winkFlag;
   winkFlag = 0;
   // отправляем
+
+  //если включено шифрование
+  if (data.use_enc_phrase)
+  {
+    xor_crypt(data.enc_phrase, s, s.length());
+    DEBUGLN(s);
+  }
+
   mqtt.publish(data.remote, s.c_str());
 }
 
@@ -80,6 +114,13 @@ void heartbeat() {
     char str[hLen + 4] = MQTT_HEADER "0,";  // +0,
     str[hLen + 2] = pirFlag + '0';
     pirFlag = 0;
+
+    //если включено шифрование
+    if (data.use_enc_phrase)
+    {
+      xor_crypt(data.enc_phrase, str, hLen + 3);
+      DEBUGLN(str);
+    }
     mqtt.publish(data.remote, str);
   }
 }

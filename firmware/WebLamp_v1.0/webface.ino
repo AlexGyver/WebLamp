@@ -40,6 +40,12 @@ void build() {
   add.BREAK();
   add.TEXT("remote", "Remote Name", data.remote);
   add.BREAK();
+  
+  add.LABEL("Use message encryption");
+  add.CHECK("use_enc_phrase", data.use_enc_phrase);
+  add.PASS("enc_phrase", "Encryption phrase", data.enc_phrase);
+  add.BREAK();
+  
   add.TEXT("host", "Host", data.host);
   add.BREAK();
   add.NUMBER("port", "Port", data.port);

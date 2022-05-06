@@ -29,7 +29,9 @@ void startup() {
   }
 
   // юзер не кликнул, пытаемся подключиться к точке
-  Serial.println("Connecting...");
+  Serial.print("Connecting to ");
+  Serial.println(data.ssid);
+  
   WiFi.mode(WIFI_STA);
   WiFi.begin(data.ssid, data.pass);
   

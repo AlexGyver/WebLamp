@@ -33,6 +33,9 @@ bool checkPortal() {
       portal.copyStr("host", data.host);
       data.port = portal.getInt("port");
 
+      portal.copyStr("enc_phrase", data.enc_phrase);
+      data.use_enc_phrase = portal.getCheck("use_enc_phrase");
+
       memory.updateNow();
       mqtt.disconnect();
       mqtt.setServer(data.host, data.port);
